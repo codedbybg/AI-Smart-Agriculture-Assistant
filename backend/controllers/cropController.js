@@ -180,19 +180,19 @@ const predictCrop = async (req, res) => {
         });
 
     } catch (error) {
+    console.error("========== CROP PREDICTION ERROR ==========");
+    console.error("Name:", error.name);
+    console.error("Message:", error.message);
+    console.error("Code:", error.code);
+    console.error("Errors:", error.errors);
+    console.error("Stack:", error.stack);
+    console.error("============================================");
 
-        console.error(
-            "Crop prediction controller error:",
-            error
-        );
-
-        return res.status(500).json({
-            success: false,
-            message:
-                error.message ||
-                "Failed to generate crop prediction.",
-        });
-    }
+    return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to generate crop prediction.",
+    });
+}
 };
 
 
