@@ -8,11 +8,17 @@ const getCropPrediction = async (soilData)=>{
 
         return response.data;
 
-    } catch (error) {
-        console.error("AI Service Error: " , error.response?.data || error.message);
+    }  catch (error) {
+    console.error("AI Service Error:", {
+        message: error.message,
+        code: error.code,
+        status: error.response?.status,
+        data: error.response?.data,
+        url: error.config?.url,
+    });
 
-        throw new Error("AI crop prediction service is currently unavailable");
-    }
+    throw new Error("AI crop prediction service is currently unavailable");
+}
 };
 
 module.exports = {
