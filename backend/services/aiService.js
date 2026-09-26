@@ -5,13 +5,25 @@ const AI_SERVICE_URL =
 
 const getCropPrediction = async (soilData) => {
     try {
+        console.log("========== AI SERVICE REQUEST ==========");
+        console.log("AI Service URL:", AI_SERVICE_URL);
+        console.log("Sending data:", soilData);
+
         const response = await axios.post(
             `${AI_SERVICE_URL}/predict`,
             soilData,
             {
-                timeout: 10000,
+                timeout: 30000,
+                headers: {
+                    "Content-Type": "application/json",
+                },
             }
         );
+
+        console.log("========== AI SERVICE RESPONSE ==========");
+        console.log("Status:", response.status);
+        console.log("Response data:", response.data);
+        console.log("=========================================");
 
         return response.data;
 
